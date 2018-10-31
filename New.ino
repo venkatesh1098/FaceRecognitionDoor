@@ -26,7 +26,7 @@ void loop(){
         Serial.println(data+1);
         if (data == 1)
             {
-              //Locks the door by clockwise direction of motor
+              //UnLocks the door by clockwise direction of motor
                 digitalWrite(motorPinA, HIGH);
                 digitalWrite(motorPinB, LOW);
                 delay(2000); 
@@ -39,7 +39,7 @@ void loop(){
             }
         else
             {
-                // Unlocks the door by rotating anticlockwise
+                // locks the door by rotating anticlockwise
                 digitalWrite(motorPinA, HIGH);
                 digitalWrite(motorPinB, LOW);
                 delay(500); 
@@ -50,20 +50,5 @@ void loop(){
                 digitalWrite(motorPinB, LOW);  
         }
     }
-
-
-
-
-    if (hasObstacle == LOW) //LOW means something is ahead, so illuminates the 13th Port connected LED
-    {
-    // Serial.println("Stop something is ahead!!");
-        digitalWrite(led, HIGH);//Illuminates the 13th Port LED
-    }
-    else
-    {
-    //Serial.println("Path is clear");
-        digitalWrite(led, LOW);
-    }
-    delay(1500);
 }
 

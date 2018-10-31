@@ -33,16 +33,25 @@ def snap():
 	    del(camera)
 
 # Reading data serially from Arduino
-ArduinoUnoSerial = serial.Serial('/dev/ttyACM0',9600)#Setting the port for reading data
+ArduinoUnoSerial = serial.Serial('/dev/ttyACM1',9600)#Setting the port for reading data
 time.sleep(1)
+# TO Train The Model
+# os.system('python3 extract_embeddings.py --dataset dataset \
+# 	--embeddings output/embeddings.pickle \
+# 	--detector face_detection_model \
+# 	--embedding-model openface_nn4.small2.v1.t7')
 while True:
     print("************************")
     a1=ArduinoUnoSerial.readline()
-    data = int(a1)
+    data = 1
     if(data==1):
         print(data+1)
         data+=1
-        snap()
+        os.system('python3 recognize_video.py --detector face_detection_model \
+	                --embedding-model openface_nn4.small2.v1.t7 \
+	                --recognizer output/recognizer.pickle \
+	                --le output/le.pickle')
+        # snap()
         
         ArduinoUnoSerial.write('1')
     else:
