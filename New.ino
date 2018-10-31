@@ -8,7 +8,7 @@ const int obstaclePin = 7;// Output of proximity sensor
 const int hasObstacle = HIGH;//inital condition of led
 
 //Data comming from python
-int data;
+int data=1;
 
 void setup(){
     pinMode(led,OUTPUT);
@@ -20,35 +20,41 @@ void setup(){
 }
 
 void loop(){
-  Serial.println("1");
-  while(Serial.available()){
-        data=Serial.read();
-        Serial.println(data+1);
+  Serial.println(data);
+  data=data+1;
+  //while(Serial.available()){
+        //data=Serial.read();
+        //Serial.println(data+1);
+        if (data==5){
+          data=1;
+        }
+        
         if (data == 1)
             {
               //UnLocks the door by clockwise direction of motor
                 digitalWrite(motorPinA, HIGH);
                 digitalWrite(motorPinB, LOW);
-                delay(2000); 
-                //This code will turn Motor B counter-clockwise for 2 sec.
+                Serial.print("Lock");
+                delay(800); 
+                digitalWrite(motorPinA, LOW);
+                digitalWrite(motorPinB, LOW);
+                delay(1000);
                 digitalWrite(motorPinA, LOW);
                 digitalWrite(motorPinB, HIGH);
-                delay(500);    
-                digitalWrite(motorPinA, LOW);
-                digitalWrite(motorPinB, LOW);  
-            }
-        else
-            {
+                delay(800); data=data+1;
+            
+          }
+        else{
                 // locks the door by rotating anticlockwise
-                digitalWrite(motorPinA, HIGH);
+                digitalWrite(motorPinA, LOW);
                 digitalWrite(motorPinB, LOW);
                 delay(500); 
                 digitalWrite(motorPinA, LOW);
-                digitalWrite(motorPinB, HIGH);
+                digitalWrite(motorPinB, LOW);
                 delay(2000);    
                 digitalWrite(motorPinA, LOW);
                 digitalWrite(motorPinB, LOW);  
         }
-    }
+ // }
 }
 
