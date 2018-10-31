@@ -9,3 +9,16 @@ const int obstaclePin = 7;// Output of proximity sensor
 const int hasObstacle = HIGH;//inital condition of led
 
 
+void setup(){
+    pinMode(led,OUTPUT);
+    pinMode(obstaclePin,INPUT);
+    Serial.begin(9600);
+    pinMode(motorPinA,OUTPUT);
+    pinMode(motorPinB,OUTPUT);
+    
+}
+
+void loop(){
+    hasObstacle = digitalRead(obstaclePin);
+    Ser
+}
