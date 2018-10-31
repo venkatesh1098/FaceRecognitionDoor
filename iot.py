@@ -6,7 +6,7 @@ import datetime
 st = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
 import cv2
 import os
-with 
+
 #creating Folders with TimeStamp
 def createFolder(directory):
     try:
@@ -52,6 +52,7 @@ while True:
 	                --embedding-model openface_nn4.small2.v1.t7 \
 	                --recognizer output/recognizer.pickle \
 	                --le output/le.pickle')
+        
         # snap()
         
         # ArduinoUnoSerial.write('1')

@@ -115,12 +115,17 @@ while True:
 			# draw the bounding box of the face along with the
 			# associated probability
 			text = "{}:	 {:.2f}%".format(name, proba * 100)
+			if(name=="sumit"or name=="venkatesh"or name=="saish"):
+				print("Hello:",name)
 			# print(json.dumps({"name": name, "percentage"= proba}))
-			with open('testfile.json','w') as f:
+				with open('testfile.json','w') as f:
 
-				s=json.dumps({"name": name, "percentage": proba})
+					s=json.dumps({"name": name, "percentage": proba})
 				# f.append(s)
-				f.write(s + '\n')
+					f.write(s + '\n')
+			else:
+				print("No access to you",name)
+
 
 			# detected = name
 			y = startY - 10 if startY - 10 > 10 else startY + 10
