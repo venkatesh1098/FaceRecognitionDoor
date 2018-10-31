@@ -16,38 +16,38 @@ void setup(){
     Serial.begin(9600);
     pinMode(motorPinA,OUTPUT);
     pinMode(motorPinB,OUTPUT);
-    
+
 }
 
 void loop(){
-    hasObstacle = digitalRead(obstaclePin);
-    Serial.println(hasObstacle);
-    while(Serial.available()){
+  Serial.println("1");
+  while(Serial.available()){
         data=Serial.read();
+        Serial.println(data+1);
         if (data == 1)
             {
               //Locks the door by clockwise direction of motor
-                digitalWrite(motorPin3, HIGH);
-                digitalWrite(motorPin4, LOW);
+                digitalWrite(motorPinA, HIGH);
+                digitalWrite(motorPinB, LOW);
                 delay(2000); 
                 //This code will turn Motor B counter-clockwise for 2 sec.
-                digitalWrite(motorPin3, LOW);
-                digitalWrite(motorPin4, HIGH);
+                digitalWrite(motorPinA, LOW);
+                digitalWrite(motorPinB, HIGH);
                 delay(500);    
-                digitalWrite(motorPin3, LOW);
-                digitalWrite(motorPin4, LOW);  
+                digitalWrite(motorPinA, LOW);
+                digitalWrite(motorPinB, LOW);  
             }
         else
             {
                 // Unlocks the door by rotating anticlockwise
-                digitalWrite(motorPin3, HIGH);
-                digitalWrite(motorPin4, LOW);
+                digitalWrite(motorPinA, HIGH);
+                digitalWrite(motorPinB, LOW);
                 delay(500); 
-                digitalWrite(motorPin3, LOW);
-                digitalWrite(motorPin4, HIGH);
+                digitalWrite(motorPinA, LOW);
+                digitalWrite(motorPinB, HIGH);
                 delay(2000);    
-                digitalWrite(motorPin3, LOW);
-                digitalWrite(motorPin4, LOW);  
+                digitalWrite(motorPinA, LOW);
+                digitalWrite(motorPinB, LOW);  
         }
     }
 
@@ -57,12 +57,12 @@ void loop(){
     if (hasObstacle == LOW) //LOW means something is ahead, so illuminates the 13th Port connected LED
     {
     // Serial.println("Stop something is ahead!!");
-        digitalWrite(LED, HIGH);//Illuminates the 13th Port LED
+        digitalWrite(led, HIGH);//Illuminates the 13th Port LED
     }
     else
     {
     //Serial.println("Path is clear");
-        digitalWrite(LED, LOW);
+        digitalWrite(led, LOW);
     }
     delay(1500);
 }

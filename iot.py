@@ -33,17 +33,20 @@ def snap():
 	    del(camera)
 
 # Reading data serially from Arduino
-ArduinoUnoSerial = serial.Serial('/dev/ttyACM1',9600)#Setting the port for reading data
+ArduinoUnoSerial = serial.Serial('/dev/ttyACM0',9600)#Setting the port for reading data
 time.sleep(1)
 while True:
     print("************************")
     a1=ArduinoUnoSerial.readline()
-    # data = int(a)
-    a=1
-    if(a==1):
+    data = int(a1)
+    if(data==1):
+        print(data+1)
+        data+=1
         snap()
-        a+=1
+        
         ArduinoUnoSerial.write('1')
     else:
+        # data=data-2
+        print ("hello")
         ArduinoUnoSerial.write('0')
 
