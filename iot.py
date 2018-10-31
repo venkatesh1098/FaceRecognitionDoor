@@ -1,3 +1,4 @@
+import json
 import serial
 import time
 ts = time.time()
@@ -5,7 +6,7 @@ import datetime
 st = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
 import cv2
 import os
-
+with 
 #creating Folders with TimeStamp
 def createFolder(directory):
     try:
@@ -29,11 +30,11 @@ def snap():
 		    return_value, image = camera.read()
 		    createFolder(folder+'/'+st)
 		    cv2.imwrite(path+str(i)+'.png', image)
-   		    i+=1
+            # i+=1
 	    del(camera)
 
 # Reading data serially from Arduino
-ArduinoUnoSerial = serial.Serial('/dev/ttyACM1',9600)#Setting the port for reading data
+ArduinoUnoSerial = serial.Serial('/dev/ttyACM0',9600)#Setting the port for reading data
 time.sleep(1)
 # TO Train The Model
 # os.system('python3 extract_embeddings.py --dataset dataset \
@@ -53,7 +54,7 @@ while True:
 	                --le output/le.pickle')
         # snap()
         
-        ArduinoUnoSerial.write('1')
+        # ArduinoUnoSerial.write('1')
     else:
         # data=data-2
         print ("hello")

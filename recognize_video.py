@@ -14,7 +14,9 @@ import pickle
 import time
 import cv2
 import os
-
+import json 
+# with open(“testfile.txt”,”w”) as f: 
+data={}
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-d", "--detector", required=True,
@@ -107,19 +109,28 @@ while True:
 			j = np.argmax(preds)
 			proba = preds[j]
 			name = le.classes_[j]
+			# print(proba)
+			
 
 			# draw the bounding box of the face along with the
 			# associated probability
-			text = "{}: {:.2f}%".format(name, proba * 100)
+			text = "{}:	 {:.2f}%".format(name, proba * 100)
+			# print(json.dumps({"name": name, "percentage"= proba}))
+			with open('testfile.json','w') as f:
+
+				s=json.dumps({"name": name, "percentage": proba})
+				# f.append(s)
+				f.write(s + '\n')
+
+			# detected = name
 			y = startY - 10 if startY - 10 > 10 else startY + 10
 			cv2.rectangle(frame, (startX, startY), (endX, endY),
 				(0, 0, 255), 2)
 			cv2.putText(frame, text, (startX, y),
 				cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-
 	# update the FPS counter
 	fps.update()
-
+	# print(detected)
 	# show the output frame
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
