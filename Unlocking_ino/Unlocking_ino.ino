@@ -1,18 +1,8 @@
 //L293D
-
-//Motor A
-const int data=1;
-const int motorPin1  = 5;  // Pin 14 of L293
-
-const int motorPin2  = 6;  // Pin 10 of L293
-
 //Motor B
 
 const int motorPin3  = 10; // Pin  7 of L293
-
 const int motorPin4  = 9;  // Pin  2 of L293
-
-
 
 //This will run only one time.
 
