@@ -10,6 +10,7 @@ st = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
 #creating folders with timestamp
 def createFolder(directory):
     try:
+		
         if not os.path.exists(directory):
             os.makedirs(directory)
     except OSError:
