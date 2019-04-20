@@ -1,8 +1,8 @@
 # USAGE
 # python recognize_video.py --detector face_detection_model \
-#	--embedding-model openface_nn4.small2.v1.t7 \
-#	--recognizer output/recognizer.pickle \
-#	--le output/le.pickle
+# 	--embedding-model openface_nn4.small2.v1.t7 \
+# 	--recognizer output/recognizer.pickle \
+# 	--le output/le.pickle
 
 # import the necessary packages
 from imutils.video import VideoStream
@@ -15,6 +15,13 @@ import time
 import cv2
 import os
 import json 
+import serial
+import notify2
+
+counter= 1
+# Reading data serially from Arduino
+
+
 # with open(“testfile.txt”,”w”) as f: 
 data={}
 # construct the argument parser and parse the arguments
@@ -115,16 +122,37 @@ while True:
 			# draw the bounding box of the face along with the
 			# associated probability
 			text = "{}:	 {:.2f}%".format(name, proba * 100)
-			if(name=="sumit"or name=="venkatesh"or name=="saish"):
+			if(name=="venkatesh" or name=="sumit"):
+				name="Venkatesh"
 				print("Hello:",name)
+				counter=counter+1
+				if(counter>=15):
+					notify2.init('foo')
+					n = notify2.Notification(name, 'Entered')
+					n.show()
+					counter=1
+			else:
+				if(counter>=5):
+					print("YOU ARE UNKNOWN")
+					notify2.init(name)
+					n = notify2.Notification('UNKNOWN',"ACCESS")
+					n.show()		
+				# counter+=1
+				# if(counter<=4):
+				# 	ArduinoUnoSerial = serial.Serial('/dev/ttyACM0',9600)
+				# 	ArduinoUnoSerial.write('1')              
+				# 	time.sleep(1)
+#Setting the port for reading data
+
+
 			# print(json.dumps({"name": name, "percentage"= proba}))
 				with open('testfile.json','w') as f:
-
-					s=json.dumps({"name": name, "percentage": proba})
+					if (name=="sumit"):
+						s=json.dumps({"name": name, "percentage": proba})
 				# f.append(s)
-					f.write(s + '\n')
-			else:
-				print("No access to you",name)
+						f.write(s + '\n')
+			# else:
+			# 	print("No access to you",name)
 
 
 			# detected = name

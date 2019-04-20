@@ -22,9 +22,9 @@ void setup(){
 void loop(){
   Serial.println(data);
   data=data+1;
-  //while(Serial.available()){
-        //data=Serial.read();
-        //Serial.println(data+1);
+  while(Serial.available()){
+        data=Serial.read();
+        Serial.println(data+1);
         if (data==5){
           data=1;
         }
@@ -57,4 +57,3 @@ void loop(){
         }
  // }
 }
-
